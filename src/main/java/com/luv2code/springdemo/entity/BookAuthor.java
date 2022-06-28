@@ -2,7 +2,6 @@ package com.luv2code.springdemo.entity;
 
 public class BookAuthor {
 
-	private String bookId;
 	private String bookName;
 	private String bookPrice;
 	private String journal;
@@ -15,30 +14,18 @@ public class BookAuthor {
 	}
 
 
-	public BookAuthor(String bookId, String bookName, String bookPrice, String journal, String authorName) {
+	public BookAuthor(String bookName, String bookPrice, String journal, String authorName) {
 		super();
-		this.bookId = bookId;
+
 		this.bookName = bookName;
 		this.bookPrice = bookPrice;
 		this.journal = journal;
 		this.authorName = authorName;
 	}
 
-
-	public String getBookId() {
-		return bookId;
-	}
-
-
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
-	}
-
-
 	public String getBookName() {
 		return bookName;
 	}
-
 
 	public void setBookName(String bookName) {
 		this.bookName = bookName;

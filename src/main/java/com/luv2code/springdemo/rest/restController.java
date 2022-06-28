@@ -117,8 +117,8 @@ public class restController {
 			return null;
 		}
 		else {
-			// save the book before returning 
-			Book result = new Book(theBookAuthors.getBookId(),theBookAuthors.getBookName(),theBookAuthors.getBookPrice(),theBookAuthors.getJournal(),author);
+			Book result = new Book(String.valueOf(theBooks.size()+1),theBookAuthors.getBookName(),theBookAuthors.getBookPrice(),theBookAuthors.getJournal(),author);
+			theBooks.add(result);
 			return result;
 		}
 	}
