@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luv2code.springdemo.entity.Author;
+import com.luv2code.springdemo.entity.AuthorBook;
 import com.luv2code.springdemo.entity.Book;
 import com.luv2code.springdemo.entity.BookAuthor;
 
@@ -182,9 +183,10 @@ public class restController {
 	
 	// add mapping for POST /author  -add new author
 	@PostMapping("/authors")
-	public Author addStudent(@RequestBody Author theAuthor) {  
-		theAuthors.add(theAuthor);
-		return theAuthor;
+	public Author addStudent(@RequestBody AuthorBook theAuthor) {  
+		Author result = new Author(theAuthors.size()+1,theAuthor.getAuthorName(),theAuthor.getExperience());
+		theAuthors.add(result);
+		return result;
 	}
 	
 }
