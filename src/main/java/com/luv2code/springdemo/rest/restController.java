@@ -109,13 +109,13 @@ public class restController {
 		System.out.println("bookExists: "+ bookExists + "  authorExists :"+ authorExists);
 		if(bookExists && authorExists) {
 			// throw an exception here if book with the same author exists...
-			theBookAuthors.setAuthorName("already exists");
-			theBookAuthors.setBookName("alreay exists");
-			return null;
+			throw new BookAlreadyExistException("Book: "+theBookAuthors.getBookName()+" by "+theBookAuthors.getAuthorName()+" Already exists..");
+			//return null;
 		}
 		else if(bookExists == false && authorExists == false) {
 			// throw a author not found exception
-			return null;
+			throw new AuthorNotFoundException("Please add the Author: "+theBookAuthors.getAuthorName()+" then add the book"	);
+			//return null;
 		}
 		else {
 			Book result = new Book(String.valueOf(theBooks.size()+1),theBookAuthors.getBookName(),theBookAuthors.getBookPrice(),theBookAuthors.getJournal(),author);
@@ -168,17 +168,30 @@ public class restController {
 //		}
 //	}
 //	
-//	@ExceptionHandler
-//	public ResponseEntity<BookErrorResponse> handleException(BookAlreadyExistsException exc){
-//		//create a StudentErrorResponse
-//		BookErrorResponse error = new BookErrorResponse();
-//		error.setStatus(HttpStatus.NOT_FOUND.value());
-//		error.setMessage(exc.getMessage());
-//		error.setTimeStamp(System.currentTimeMillis());
-//		//return ResponseEntity
-//		
-//		return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
-//	}
+	@ExceptionHandler
+	public ResponseEntity<BookErrorResponse> handleException(BookAlreadyExistException exc){
+		//create a StudentErrorResponse
+		BookErrorResponse error = new BookErrorResponse();
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setMessage(exc.getMessage());
+		error.setTimeStamp(System.currentTimeMillis());
+		//return ResponseEntity
+		
+		return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@ExceptionHandler
+	public ResponseEntity<AuthorErrorResponse> handleException(AuthorNotFoundException exc){
+		//create a StudentErrorResponse
+		AuthorErrorResponse error = new AuthorErrorResponse();
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setMessage(exc.getMessage());
+		error.setTimeStamp(System.currentTimeMillis());
+		//return ResponseEntity
+		
+		return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+	}
 	//----------------testing verison--------------------
 	
 	// add mapping for POST /author  -add new author
